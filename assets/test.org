@@ -1,0 +1,20 @@
+#+STARTUP: showall
+#+OPTIONS: \n:t
+#+OPTIONS: ^:{}
+* TODO task1
+  SCHEDULED: <2019-10-07 Mon> DEADLINE: <2019-10-14 Mon>
+  :LOGBOOK:
+  CLOCK: [2019-10-07 Mon 12:00]--[2019-10-07 Mon 13:00] =>  1:00
+  :END:
+  BodyBodyBodyBodyBody
+** DONE task2
+  SCHEDULED: <2019-10-07 Mon>
+* TODO task3
+  SCHEDULED: <2019-10-08 Tue 15:00-15:30 +1w>
+  :PROPERTIES:
+  :LAST_REPEAT: [2019-10-01 Tue 15:30]
+  :END:
+  - State "DONE"       from "TODO"       [2019-10-01 Tue 15:30]
+  :LOGBOOK:
+  CLOCK: [2019-10-01 Tue 15:00]--[2019-10-01 Tue 15:30] =>  0:30
+  :END:
