@@ -1,17 +1,16 @@
-name: org_parser_example
-description: Demonstrates how to use the org_parser plugin.
+name: orgcal
+description: "Org-mode calendar app"
 publish_to: 'none'
 version: 1.0.0
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ^3.7.2
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.5
   provider: ^5.0.0
   http: ^0.13.1
@@ -20,17 +19,17 @@ dependencies:
   flutter_state_notifier: ^0.7.0
   freezed_annotation: ^0.14.1
   flutter_launcher_icons: ^0.9.0
-  intl: ^0.17.0
+  intl: ^0.19.0
+  org_parser:
+    git: https://github.com/yuzumone/org_parser.git
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^5.0.0
   json_serializable: ^4.1.0
   build_runner:
   freezed: ^0.14.1+1
-
-  org_parser:
-    path: ../
 
 flutter:
   uses-material-design: true

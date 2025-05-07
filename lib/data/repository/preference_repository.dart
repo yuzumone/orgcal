@@ -51,6 +51,11 @@ class Preference {
   List<String> doneKeywords;
   String fontFace;
   int fontSize;
-  Preference(this.urls, this.todoKeywords, this.doneKeywords, this.fontFace,
-      this.fontSize);
+  Preference(
+    this.urls,
+    this.todoKeywords,
+    this.doneKeywords,
+    this.fontFace,
+    this.fontSize,
+  );
 }

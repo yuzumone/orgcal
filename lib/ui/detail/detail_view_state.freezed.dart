@@ -10,17 +10,15 @@ part of 'detail_view_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$DetailViewStateTearOff {
   const _$DetailViewStateTearOff();
 
   _DetailViewState call({String fontFace = 'Myrica', int fontSize = 16}) {
-    return _DetailViewState(
-      fontFace: fontFace,
-      fontSize: fontSize,
-    );
+    return _DetailViewState(fontFace: fontFace, fontSize: fontSize);
   }
 }
 
@@ -40,8 +38,9 @@ mixin _$DetailViewState {
 /// @nodoc
 abstract class $DetailViewStateCopyWith<$Res> {
   factory $DetailViewStateCopyWith(
-          DetailViewState value, $Res Function(DetailViewState) then) =
-      _$DetailViewStateCopyWithImpl<$Res>;
+    DetailViewState value,
+    $Res Function(DetailViewState) then,
+  ) = _$DetailViewStateCopyWithImpl<$Res>;
   $Res call({String fontFace, int fontSize});
 }
 
@@ -55,20 +54,21 @@ class _$DetailViewStateCopyWithImpl<$Res>
   final $Res Function(DetailViewState) _then;
 
   @override
-  $Res call({
-    Object? fontFace = freezed,
-    Object? fontSize = freezed,
-  }) {
-    return _then(_value.copyWith(
-      fontFace: fontFace == freezed
-          ? _value.fontFace
-          : fontFace // ignore: cast_nullable_to_non_nullable
-              as String,
-      fontSize: fontSize == freezed
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? fontFace = freezed, Object? fontSize = freezed}) {
+    return _then(
+      _value.copyWith(
+        fontFace:
+            fontFace == freezed
+                ? _value.fontFace
+                : fontFace // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fontSize:
+            fontSize == freezed
+                ? _value.fontSize
+                : fontSize // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -76,8 +76,9 @@ class _$DetailViewStateCopyWithImpl<$Res>
 abstract class _$DetailViewStateCopyWith<$Res>
     implements $DetailViewStateCopyWith<$Res> {
   factory _$DetailViewStateCopyWith(
-          _DetailViewState value, $Res Function(_DetailViewState) then) =
-      __$DetailViewStateCopyWithImpl<$Res>;
+    _DetailViewState value,
+    $Res Function(_DetailViewState) then,
+  ) = __$DetailViewStateCopyWithImpl<$Res>;
   @override
   $Res call({String fontFace, int fontSize});
 }
@@ -87,27 +88,29 @@ class __$DetailViewStateCopyWithImpl<$Res>
     extends _$DetailViewStateCopyWithImpl<$Res>
     implements _$DetailViewStateCopyWith<$Res> {
   __$DetailViewStateCopyWithImpl(
-      _DetailViewState _value, $Res Function(_DetailViewState) _then)
-      : super(_value, (v) => _then(v as _DetailViewState));
+    _DetailViewState _value,
+    $Res Function(_DetailViewState) _then,
+  ) : super(_value, (v) => _then(v as _DetailViewState));
 
   @override
   _DetailViewState get _value => super._value as _DetailViewState;
 
   @override
-  $Res call({
-    Object? fontFace = freezed,
-    Object? fontSize = freezed,
-  }) {
-    return _then(_DetailViewState(
-      fontFace: fontFace == freezed
-          ? _value.fontFace
-          : fontFace // ignore: cast_nullable_to_non_nullable
-              as String,
-      fontSize: fontSize == freezed
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? fontFace = freezed, Object? fontSize = freezed}) {
+    return _then(
+      _DetailViewState(
+        fontFace:
+            fontFace == freezed
+                ? _value.fontFace
+                : fontFace // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fontSize:
+            fontSize == freezed
+                ? _value.fontSize
+                : fontSize // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -143,11 +146,15 @@ class _$_DetailViewState
     return identical(this, other) ||
         (other is _DetailViewState &&
             (identical(other.fontFace, fontFace) ||
-                const DeepCollectionEquality()
-                    .equals(other.fontFace, fontFace)) &&
+                const DeepCollectionEquality().equals(
+                  other.fontFace,
+                  fontFace,
+                )) &&
             (identical(other.fontSize, fontSize) ||
-                const DeepCollectionEquality()
-                    .equals(other.fontSize, fontSize)));
+                const DeepCollectionEquality().equals(
+                  other.fontSize,
+                  fontSize,
+                )));
   }
 
   @override

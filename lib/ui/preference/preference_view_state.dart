@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:org_parser_example/data/model/preference_view_type.dart';
-import 'package:org_parser_example/data/repository/preference_repository.dart';
+import 'package:orgcal/data/model/preference_view_type.dart';
+import 'package:orgcal/data/repository/preference_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 part 'preference_view_state.freezed.dart';

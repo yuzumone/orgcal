@@ -1,6 +1,1 @@
-enum PreferenceViewType {
-  main,
-  orgUrl,
-  todo,
-  done,
-}
+enum PreferenceViewType { main, orgUrl, todo, done }

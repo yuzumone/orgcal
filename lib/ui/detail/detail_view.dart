@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:org_parser_example/ui/detail/detail_view_state.dart';
+import 'package:orgcal/ui/detail/detail_view_state.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
@@ -10,10 +10,12 @@ class DetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var fontFace =
-        context.select<DetailViewState, String>((state) => state.fontFace);
-    var fontSize =
-        context.select<DetailViewState, int>((state) => state.fontSize);
+    var fontFace = context.select<DetailViewState, String>(
+      (state) => state.fontFace,
+    );
+    var fontSize = context.select<DetailViewState, int>(
+      (state) => state.fontSize,
+    );
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -30,9 +32,7 @@ class DetailView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 16.0,
-            ),
+            SizedBox(height: 16.0),
             Flexible(
               child: Text(
                 headline.chunks.skip(1).join('\n'),
