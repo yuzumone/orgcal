@@ -10,19 +10,21 @@ part of 'preference_view_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$PreferenceViewStateTearOff {
   const _$PreferenceViewStateTearOff();
 
-  _PreferenceViewState call(
-      {dynamic viewType = PreferenceViewType.main,
-      List<String> urls = const [],
-      List<String> todoKeywords = const [],
-      List<String> doneKeywords = const [],
-      String fontFace = 'Myrica',
-      int fontSize = 16}) {
+  _PreferenceViewState call({
+    dynamic viewType = PreferenceViewType.main,
+    List<String> urls = const [],
+    List<String> todoKeywords = const [],
+    List<String> doneKeywords = const [],
+    String fontFace = 'Myrica',
+    int fontSize = 16,
+  }) {
     return _PreferenceViewState(
       viewType: viewType,
       urls: urls,
@@ -54,15 +56,17 @@ mixin _$PreferenceViewState {
 /// @nodoc
 abstract class $PreferenceViewStateCopyWith<$Res> {
   factory $PreferenceViewStateCopyWith(
-          PreferenceViewState value, $Res Function(PreferenceViewState) then) =
-      _$PreferenceViewStateCopyWithImpl<$Res>;
-  $Res call(
-      {dynamic viewType,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      String fontFace,
-      int fontSize});
+    PreferenceViewState value,
+    $Res Function(PreferenceViewState) then,
+  ) = _$PreferenceViewStateCopyWithImpl<$Res>;
+  $Res call({
+    dynamic viewType,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    String fontFace,
+    int fontSize,
+  });
 }
 
 /// @nodoc
@@ -83,49 +87,59 @@ class _$PreferenceViewStateCopyWithImpl<$Res>
     Object? fontFace = freezed,
     Object? fontSize = freezed,
   }) {
-    return _then(_value.copyWith(
-      viewType: viewType == freezed
-          ? _value.viewType
-          : viewType // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      urls: urls == freezed
-          ? _value.urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      todoKeywords: todoKeywords == freezed
-          ? _value.todoKeywords
-          : todoKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      doneKeywords: doneKeywords == freezed
-          ? _value.doneKeywords
-          : doneKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      fontFace: fontFace == freezed
-          ? _value.fontFace
-          : fontFace // ignore: cast_nullable_to_non_nullable
-              as String,
-      fontSize: fontSize == freezed
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _value.copyWith(
+        viewType:
+            viewType == freezed
+                ? _value.viewType
+                : viewType // ignore: cast_nullable_to_non_nullable
+                    as dynamic,
+        urls:
+            urls == freezed
+                ? _value.urls
+                : urls // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        todoKeywords:
+            todoKeywords == freezed
+                ? _value.todoKeywords
+                : todoKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        doneKeywords:
+            doneKeywords == freezed
+                ? _value.doneKeywords
+                : doneKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        fontFace:
+            fontFace == freezed
+                ? _value.fontFace
+                : fontFace // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fontSize:
+            fontSize == freezed
+                ? _value.fontSize
+                : fontSize // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 abstract class _$PreferenceViewStateCopyWith<$Res>
     implements $PreferenceViewStateCopyWith<$Res> {
-  factory _$PreferenceViewStateCopyWith(_PreferenceViewState value,
-          $Res Function(_PreferenceViewState) then) =
-      __$PreferenceViewStateCopyWithImpl<$Res>;
+  factory _$PreferenceViewStateCopyWith(
+    _PreferenceViewState value,
+    $Res Function(_PreferenceViewState) then,
+  ) = __$PreferenceViewStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {dynamic viewType,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      String fontFace,
-      int fontSize});
+  $Res call({
+    dynamic viewType,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    String fontFace,
+    int fontSize,
+  });
 }
 
 /// @nodoc
@@ -133,8 +147,9 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
     extends _$PreferenceViewStateCopyWithImpl<$Res>
     implements _$PreferenceViewStateCopyWith<$Res> {
   __$PreferenceViewStateCopyWithImpl(
-      _PreferenceViewState _value, $Res Function(_PreferenceViewState) _then)
-      : super(_value, (v) => _then(v as _PreferenceViewState));
+    _PreferenceViewState _value,
+    $Res Function(_PreferenceViewState) _then,
+  ) : super(_value, (v) => _then(v as _PreferenceViewState));
 
   @override
   _PreferenceViewState get _value => super._value as _PreferenceViewState;
@@ -148,29 +163,36 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
     Object? fontFace = freezed,
     Object? fontSize = freezed,
   }) {
-    return _then(_PreferenceViewState(
-      viewType: viewType == freezed ? _value.viewType : viewType,
-      urls: urls == freezed
-          ? _value.urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      todoKeywords: todoKeywords == freezed
-          ? _value.todoKeywords
-          : todoKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      doneKeywords: doneKeywords == freezed
-          ? _value.doneKeywords
-          : doneKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      fontFace: fontFace == freezed
-          ? _value.fontFace
-          : fontFace // ignore: cast_nullable_to_non_nullable
-              as String,
-      fontSize: fontSize == freezed
-          ? _value.fontSize
-          : fontSize // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _PreferenceViewState(
+        viewType: viewType == freezed ? _value.viewType : viewType,
+        urls:
+            urls == freezed
+                ? _value.urls
+                : urls // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        todoKeywords:
+            todoKeywords == freezed
+                ? _value.todoKeywords
+                : todoKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        doneKeywords:
+            doneKeywords == freezed
+                ? _value.doneKeywords
+                : doneKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        fontFace:
+            fontFace == freezed
+                ? _value.fontFace
+                : fontFace // ignore: cast_nullable_to_non_nullable
+                    as String,
+        fontSize:
+            fontSize == freezed
+                ? _value.fontSize
+                : fontSize // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -178,13 +200,14 @@ class __$PreferenceViewStateCopyWithImpl<$Res>
 class _$_PreferenceViewState
     with DiagnosticableTreeMixin
     implements _PreferenceViewState {
-  const _$_PreferenceViewState(
-      {this.viewType = PreferenceViewType.main,
-      this.urls = const [],
-      this.todoKeywords = const [],
-      this.doneKeywords = const [],
-      this.fontFace = 'Myrica',
-      this.fontSize = 16});
+  const _$_PreferenceViewState({
+    this.viewType = PreferenceViewType.main,
+    this.urls = const [],
+    this.todoKeywords = const [],
+    this.doneKeywords = const [],
+    this.fontFace = 'Myrica',
+    this.fontSize = 16,
+  });
 
   @JsonKey(defaultValue: PreferenceViewType.main)
   @override
@@ -228,22 +251,32 @@ class _$_PreferenceViewState
     return identical(this, other) ||
         (other is _PreferenceViewState &&
             (identical(other.viewType, viewType) ||
-                const DeepCollectionEquality()
-                    .equals(other.viewType, viewType)) &&
+                const DeepCollectionEquality().equals(
+                  other.viewType,
+                  viewType,
+                )) &&
             (identical(other.urls, urls) ||
                 const DeepCollectionEquality().equals(other.urls, urls)) &&
             (identical(other.todoKeywords, todoKeywords) ||
-                const DeepCollectionEquality()
-                    .equals(other.todoKeywords, todoKeywords)) &&
+                const DeepCollectionEquality().equals(
+                  other.todoKeywords,
+                  todoKeywords,
+                )) &&
             (identical(other.doneKeywords, doneKeywords) ||
-                const DeepCollectionEquality()
-                    .equals(other.doneKeywords, doneKeywords)) &&
+                const DeepCollectionEquality().equals(
+                  other.doneKeywords,
+                  doneKeywords,
+                )) &&
             (identical(other.fontFace, fontFace) ||
-                const DeepCollectionEquality()
-                    .equals(other.fontFace, fontFace)) &&
+                const DeepCollectionEquality().equals(
+                  other.fontFace,
+                  fontFace,
+                )) &&
             (identical(other.fontSize, fontSize) ||
-                const DeepCollectionEquality()
-                    .equals(other.fontSize, fontSize)));
+                const DeepCollectionEquality().equals(
+                  other.fontSize,
+                  fontSize,
+                )));
   }
 
   @override
@@ -260,17 +293,20 @@ class _$_PreferenceViewState
   @override
   _$PreferenceViewStateCopyWith<_PreferenceViewState> get copyWith =>
       __$PreferenceViewStateCopyWithImpl<_PreferenceViewState>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 }
 
 abstract class _PreferenceViewState implements PreferenceViewState {
-  const factory _PreferenceViewState(
-      {dynamic viewType,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      String fontFace,
-      int fontSize}) = _$_PreferenceViewState;
+  const factory _PreferenceViewState({
+    dynamic viewType,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    String fontFace,
+    int fontSize,
+  }) = _$_PreferenceViewState;
 
   @override
   dynamic get viewType => throw _privateConstructorUsedError;

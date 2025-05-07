@@ -10,19 +10,21 @@ part of 'home_view_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$HomeViewStateTearOff {
   const _$HomeViewStateTearOff();
 
-  _HomeViewState call(
-      {int pageIndex = 0,
-      List<File> files = const [],
-      List<String> urls = const [],
-      List<String> todoKeywords = const [],
-      List<String> doneKeywords = const [],
-      int weekDiff = 0}) {
+  _HomeViewState call({
+    int pageIndex = 0,
+    List<File> files = const [],
+    List<String> urls = const [],
+    List<String> todoKeywords = const [],
+    List<String> doneKeywords = const [],
+    int weekDiff = 0,
+  }) {
     return _HomeViewState(
       pageIndex: pageIndex,
       files: files,
@@ -54,15 +56,17 @@ mixin _$HomeViewState {
 /// @nodoc
 abstract class $HomeViewStateCopyWith<$Res> {
   factory $HomeViewStateCopyWith(
-          HomeViewState value, $Res Function(HomeViewState) then) =
-      _$HomeViewStateCopyWithImpl<$Res>;
-  $Res call(
-      {int pageIndex,
-      List<File> files,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      int weekDiff});
+    HomeViewState value,
+    $Res Function(HomeViewState) then,
+  ) = _$HomeViewStateCopyWithImpl<$Res>;
+  $Res call({
+    int pageIndex,
+    List<File> files,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    int weekDiff,
+  });
 }
 
 /// @nodoc
@@ -83,32 +87,40 @@ class _$HomeViewStateCopyWithImpl<$Res>
     Object? doneKeywords = freezed,
     Object? weekDiff = freezed,
   }) {
-    return _then(_value.copyWith(
-      pageIndex: pageIndex == freezed
-          ? _value.pageIndex
-          : pageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      files: files == freezed
-          ? _value.files
-          : files // ignore: cast_nullable_to_non_nullable
-              as List<File>,
-      urls: urls == freezed
-          ? _value.urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      todoKeywords: todoKeywords == freezed
-          ? _value.todoKeywords
-          : todoKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      doneKeywords: doneKeywords == freezed
-          ? _value.doneKeywords
-          : doneKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      weekDiff: weekDiff == freezed
-          ? _value.weekDiff
-          : weekDiff // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _value.copyWith(
+        pageIndex:
+            pageIndex == freezed
+                ? _value.pageIndex
+                : pageIndex // ignore: cast_nullable_to_non_nullable
+                    as int,
+        files:
+            files == freezed
+                ? _value.files
+                : files // ignore: cast_nullable_to_non_nullable
+                    as List<File>,
+        urls:
+            urls == freezed
+                ? _value.urls
+                : urls // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        todoKeywords:
+            todoKeywords == freezed
+                ? _value.todoKeywords
+                : todoKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        doneKeywords:
+            doneKeywords == freezed
+                ? _value.doneKeywords
+                : doneKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        weekDiff:
+            weekDiff == freezed
+                ? _value.weekDiff
+                : weekDiff // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
@@ -116,16 +128,18 @@ class _$HomeViewStateCopyWithImpl<$Res>
 abstract class _$HomeViewStateCopyWith<$Res>
     implements $HomeViewStateCopyWith<$Res> {
   factory _$HomeViewStateCopyWith(
-          _HomeViewState value, $Res Function(_HomeViewState) then) =
-      __$HomeViewStateCopyWithImpl<$Res>;
+    _HomeViewState value,
+    $Res Function(_HomeViewState) then,
+  ) = __$HomeViewStateCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int pageIndex,
-      List<File> files,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      int weekDiff});
+  $Res call({
+    int pageIndex,
+    List<File> files,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    int weekDiff,
+  });
 }
 
 /// @nodoc
@@ -133,8 +147,9 @@ class __$HomeViewStateCopyWithImpl<$Res>
     extends _$HomeViewStateCopyWithImpl<$Res>
     implements _$HomeViewStateCopyWith<$Res> {
   __$HomeViewStateCopyWithImpl(
-      _HomeViewState _value, $Res Function(_HomeViewState) _then)
-      : super(_value, (v) => _then(v as _HomeViewState));
+    _HomeViewState _value,
+    $Res Function(_HomeViewState) _then,
+  ) : super(_value, (v) => _then(v as _HomeViewState));
 
   @override
   _HomeViewState get _value => super._value as _HomeViewState;
@@ -148,44 +163,53 @@ class __$HomeViewStateCopyWithImpl<$Res>
     Object? doneKeywords = freezed,
     Object? weekDiff = freezed,
   }) {
-    return _then(_HomeViewState(
-      pageIndex: pageIndex == freezed
-          ? _value.pageIndex
-          : pageIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-      files: files == freezed
-          ? _value.files
-          : files // ignore: cast_nullable_to_non_nullable
-              as List<File>,
-      urls: urls == freezed
-          ? _value.urls
-          : urls // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      todoKeywords: todoKeywords == freezed
-          ? _value.todoKeywords
-          : todoKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      doneKeywords: doneKeywords == freezed
-          ? _value.doneKeywords
-          : doneKeywords // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      weekDiff: weekDiff == freezed
-          ? _value.weekDiff
-          : weekDiff // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      _HomeViewState(
+        pageIndex:
+            pageIndex == freezed
+                ? _value.pageIndex
+                : pageIndex // ignore: cast_nullable_to_non_nullable
+                    as int,
+        files:
+            files == freezed
+                ? _value.files
+                : files // ignore: cast_nullable_to_non_nullable
+                    as List<File>,
+        urls:
+            urls == freezed
+                ? _value.urls
+                : urls // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        todoKeywords:
+            todoKeywords == freezed
+                ? _value.todoKeywords
+                : todoKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        doneKeywords:
+            doneKeywords == freezed
+                ? _value.doneKeywords
+                : doneKeywords // ignore: cast_nullable_to_non_nullable
+                    as List<String>,
+        weekDiff:
+            weekDiff == freezed
+                ? _value.weekDiff
+                : weekDiff // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
-  const _$_HomeViewState(
-      {this.pageIndex = 0,
-      this.files = const [],
-      this.urls = const [],
-      this.todoKeywords = const [],
-      this.doneKeywords = const [],
-      this.weekDiff = 0});
+  const _$_HomeViewState({
+    this.pageIndex = 0,
+    this.files = const [],
+    this.urls = const [],
+    this.todoKeywords = const [],
+    this.doneKeywords = const [],
+    this.weekDiff = 0,
+  });
 
   @JsonKey(defaultValue: 0)
   @override
@@ -229,21 +253,29 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
     return identical(this, other) ||
         (other is _HomeViewState &&
             (identical(other.pageIndex, pageIndex) ||
-                const DeepCollectionEquality()
-                    .equals(other.pageIndex, pageIndex)) &&
+                const DeepCollectionEquality().equals(
+                  other.pageIndex,
+                  pageIndex,
+                )) &&
             (identical(other.files, files) ||
                 const DeepCollectionEquality().equals(other.files, files)) &&
             (identical(other.urls, urls) ||
                 const DeepCollectionEquality().equals(other.urls, urls)) &&
             (identical(other.todoKeywords, todoKeywords) ||
-                const DeepCollectionEquality()
-                    .equals(other.todoKeywords, todoKeywords)) &&
+                const DeepCollectionEquality().equals(
+                  other.todoKeywords,
+                  todoKeywords,
+                )) &&
             (identical(other.doneKeywords, doneKeywords) ||
-                const DeepCollectionEquality()
-                    .equals(other.doneKeywords, doneKeywords)) &&
+                const DeepCollectionEquality().equals(
+                  other.doneKeywords,
+                  doneKeywords,
+                )) &&
             (identical(other.weekDiff, weekDiff) ||
-                const DeepCollectionEquality()
-                    .equals(other.weekDiff, weekDiff)));
+                const DeepCollectionEquality().equals(
+                  other.weekDiff,
+                  weekDiff,
+                )));
   }
 
   @override
@@ -263,13 +295,14 @@ class _$_HomeViewState with DiagnosticableTreeMixin implements _HomeViewState {
 }
 
 abstract class _HomeViewState implements HomeViewState {
-  const factory _HomeViewState(
-      {int pageIndex,
-      List<File> files,
-      List<String> urls,
-      List<String> todoKeywords,
-      List<String> doneKeywords,
-      int weekDiff}) = _$_HomeViewState;
+  const factory _HomeViewState({
+    int pageIndex,
+    List<File> files,
+    List<String> urls,
+    List<String> todoKeywords,
+    List<String> doneKeywords,
+    int weekDiff,
+  }) = _$_HomeViewState;
 
   @override
   int get pageIndex => throw _privateConstructorUsedError;

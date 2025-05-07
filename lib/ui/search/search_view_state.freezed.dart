@@ -10,16 +10,15 @@ part of 'search_view_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods',
+);
 
 /// @nodoc
 class _$SearchViewStateTearOff {
   const _$SearchViewStateTearOff();
 
   _SearchViewState call({List<Headline> result = const []}) {
-    return _SearchViewState(
-      result: result,
-    );
+    return _SearchViewState(result: result);
   }
 }
 
@@ -38,8 +37,9 @@ mixin _$SearchViewState {
 /// @nodoc
 abstract class $SearchViewStateCopyWith<$Res> {
   factory $SearchViewStateCopyWith(
-          SearchViewState value, $Res Function(SearchViewState) then) =
-      _$SearchViewStateCopyWithImpl<$Res>;
+    SearchViewState value,
+    $Res Function(SearchViewState) then,
+  ) = _$SearchViewStateCopyWithImpl<$Res>;
   $Res call({List<Headline> result});
 }
 
@@ -53,15 +53,16 @@ class _$SearchViewStateCopyWithImpl<$Res>
   final $Res Function(SearchViewState) _then;
 
   @override
-  $Res call({
-    Object? result = freezed,
-  }) {
-    return _then(_value.copyWith(
-      result: result == freezed
-          ? _value.result
-          : result // ignore: cast_nullable_to_non_nullable
-              as List<Headline>,
-    ));
+  $Res call({Object? result = freezed}) {
+    return _then(
+      _value.copyWith(
+        result:
+            result == freezed
+                ? _value.result
+                : result // ignore: cast_nullable_to_non_nullable
+                    as List<Headline>,
+      ),
+    );
   }
 }
 
@@ -69,8 +70,9 @@ class _$SearchViewStateCopyWithImpl<$Res>
 abstract class _$SearchViewStateCopyWith<$Res>
     implements $SearchViewStateCopyWith<$Res> {
   factory _$SearchViewStateCopyWith(
-          _SearchViewState value, $Res Function(_SearchViewState) then) =
-      __$SearchViewStateCopyWithImpl<$Res>;
+    _SearchViewState value,
+    $Res Function(_SearchViewState) then,
+  ) = __$SearchViewStateCopyWithImpl<$Res>;
   @override
   $Res call({List<Headline> result});
 }
@@ -80,22 +82,24 @@ class __$SearchViewStateCopyWithImpl<$Res>
     extends _$SearchViewStateCopyWithImpl<$Res>
     implements _$SearchViewStateCopyWith<$Res> {
   __$SearchViewStateCopyWithImpl(
-      _SearchViewState _value, $Res Function(_SearchViewState) _then)
-      : super(_value, (v) => _then(v as _SearchViewState));
+    _SearchViewState _value,
+    $Res Function(_SearchViewState) _then,
+  ) : super(_value, (v) => _then(v as _SearchViewState));
 
   @override
   _SearchViewState get _value => super._value as _SearchViewState;
 
   @override
-  $Res call({
-    Object? result = freezed,
-  }) {
-    return _then(_SearchViewState(
-      result: result == freezed
-          ? _value.result
-          : result // ignore: cast_nullable_to_non_nullable
-              as List<Headline>,
-    ));
+  $Res call({Object? result = freezed}) {
+    return _then(
+      _SearchViewState(
+        result:
+            result == freezed
+                ? _value.result
+                : result // ignore: cast_nullable_to_non_nullable
+                    as List<Headline>,
+      ),
+    );
   }
 }
 

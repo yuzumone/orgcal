@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:org_parser_example/data/repository/preference_repository.dart';
+import 'package:orgcal/data/repository/preference_repository.dart';
 import 'package:state_notifier/state_notifier.dart';
 
 part 'detail_view_state.freezed.dart';
@@ -28,9 +28,6 @@ class DetailViewStateNotifier extends StateNotifier<DetailViewState>
 
   Future<void> init() async {
     var _pref = await _preferenceRepository.getPreference();
-    state = state.copyWith(
-      fontFace: _pref.fontFace,
-      fontSize: _pref.fontSize,
-    );
+    state = state.copyWith(fontFace: _pref.fontFace, fontSize: _pref.fontSize);
   }
 }

@@ -7,9 +7,8 @@ part 'search_view_state.freezed.dart';
 
 @freezed
 abstract class SearchViewState with _$SearchViewState {
-  const factory SearchViewState({
-    @Default([]) List<Headline> result,
-  }) = _SearchViewState;
+  const factory SearchViewState({@Default([]) List<Headline> result}) =
+      _SearchViewState;
 }
 
 class SearchViewStateNotifier extends StateNotifier<SearchViewState> {

@@ -2,7 +2,7 @@ import 'dart:convert' show utf8;
 import 'package:http/http.dart' as http;
 import 'package:http_retry/http_retry.dart';
 import 'package:org_parser/org_parser.dart';
-import 'package:org_parser_example/data/model/file.dart';
+import 'package:orgcal/data/model/file.dart';
 
 class FileRepository {
   late final RetryClient client;
@@ -28,7 +28,9 @@ class FileRepository {
   }
 
   Future<List<File>> getWebFiles(
-      List<String> urls, List<String> keywords) async {
+    List<String> urls,
+    List<String> keywords,
+  ) async {
     var files = <File>[];
     for (var url in urls) {
       var res = await client.get(Uri.parse(url));

@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:org_parser_example/data/model/file.dart';
-import 'package:org_parser_example/ui/detail/detail_view.dart';
-import 'package:org_parser_example/ui/detail/detail_view_state.dart';
-import 'package:org_parser_example/ui/home/home_view_state.dart';
+import 'package:orgcal/data/model/file.dart';
+import 'package:orgcal/ui/detail/detail_view.dart';
+import 'package:orgcal/ui/detail/detail_view_state.dart';
+import 'package:orgcal/ui/home/home_view_state.dart';
 import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
 class TodoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var files =
-        context.select<HomeViewState, List<File>>((state) => state.files);
-    var todoKeywords = context
-        .select<HomeViewState, List<String>>((state) => state.todoKeywords);
+    var files = context.select<HomeViewState, List<File>>(
+      (state) => state.files,
+    );
+    var todoKeywords = context.select<HomeViewState, List<String>>(
+      (state) => state.todoKeywords,
+    );
     var todos = _getTodoList(files, todoKeywords);
     return ListView.builder(
-        itemCount: todos.length,
-        itemBuilder: (BuildContext context, int index) =>
-            _buildListTile(context, todos[index]));
+      itemCount: todos.length,
+      itemBuilder:
+          (BuildContext context, int index) =>
+              _buildListTile(context, todos[index]),
+    );
   }
 
   List<Headline> _getTodoList(List<File> files, List<String> todoKeyword) {
@@ -34,11 +38,14 @@ class TodoView extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                StateNotifierProvider<DetailViewStateNotifier, DetailViewState>(
-              create: (_) => DetailViewStateNotifier(),
-              child: DetailView(headline: headline),
-            ),
+            builder:
+                (context) => StateNotifierProvider<
+                  DetailViewStateNotifier,
+                  DetailViewState
+                >(
+                  create: (_) => DetailViewStateNotifier(),
+                  child: DetailView(headline: headline),
+                ),
           ),
         );
       },
@@ -49,9 +56,7 @@ class TodoView extends StatelessWidget {
             headline.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Colors.red,
-            ),
+            style: TextStyle(color: Colors.red),
           ),
         ),
       ),
