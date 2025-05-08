@@ -4,21 +4,22 @@ import 'package:orgcal/ui/preference/preference_view_state.dart';
 import 'package:provider/provider.dart';
 
 class PreferenceView extends StatelessWidget {
+  const PreferenceView({super.key});
+
   @override
   Widget build(BuildContext context) {
     var viewType = context.select<PreferenceViewState, PreferenceViewType>(
       (state) => state.viewType,
     );
-    return WillPopScope(
-      onWillPop: () async {
-        if (viewType == PreferenceViewType.main) {
-          Navigator.of(context).pop();
-        } else {
-          context.read<PreferenceViewStateNotifier>().setViewType(
-            PreferenceViewType.main,
-          );
+    var preferenceViewStateNotifier =
+        context.read<PreferenceViewStateNotifier>();
+    return PopScope(
+      canPop: viewType == PreferenceViewType.main,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) {
+          return;
         }
-        return false;
+        preferenceViewStateNotifier.setViewType(PreferenceViewType.main);
       },
       child: Scaffold(
         appBar: AppBar(
@@ -27,7 +28,7 @@ class PreferenceView extends StatelessWidget {
               viewType == PreferenceViewType.main
                   ? null
                   : IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    icon: Icon(Icons.arrow_back),
                     onPressed: () {
                       context.read<PreferenceViewStateNotifier>().setViewType(
                         PreferenceViewType.main,
@@ -38,8 +39,8 @@ class PreferenceView extends StatelessWidget {
         body: Container(
           child:
               viewType == PreferenceViewType.main
-                  ? _MainPreferenceView()
-                  : _PreferenceInputView(),
+                  ? MainPreferenceView()
+                  : PreferenceInputView(),
         ),
       ),
     );
@@ -79,7 +80,9 @@ Future<String?> _buildInputDialog(BuildContext context, String title) async {
   );
 }
 
-class _MainPreferenceView extends StatelessWidget {
+class MainPreferenceView extends StatelessWidget {
+  const MainPreferenceView({super.key});
+
   static const fontFaces = ['Myrica', 'Cica', 'SourceHanCodeJP', 'HackGen'];
   static const fontSize = [
     10,
@@ -101,165 +104,160 @@ class _MainPreferenceView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          ListTile(
-            title: Text('Org File'),
-            subtitle: Text('OrgファイルのURL'),
-            onTap: () {
-              context.read<PreferenceViewStateNotifier>().setViewType(
-                PreferenceViewType.orgUrl,
-              );
-            },
-          ),
-          ListTile(
-            title: Text('TODO Keyword'),
-            subtitle: Text('完了のTODOと認識するキーワード'),
-            onTap: () {
-              context.read<PreferenceViewStateNotifier>().setViewType(
-                PreferenceViewType.todo,
-              );
-            },
-          ),
-          ListTile(
-            title: Text('DONE Keyword'),
-            subtitle: Text('未完了のTODOと認識するキーワード'),
-            onTap: () {
-              context.read<PreferenceViewStateNotifier>().setViewType(
-                PreferenceViewType.done,
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Font face'),
-            trailing: DropdownButton(
-              value: context.select<PreferenceViewState, String>(
-                (state) => state.fontFace,
-              ),
-              onChanged: (String? newValue) {
-                if (newValue == null) return;
-                context.read<PreferenceViewStateNotifier>().setFontFace(
-                  newValue,
-                );
-              },
-              items:
-                  fontFaces
-                      .map<DropdownMenuItem<String>>(
-                        (e) =>
-                            DropdownMenuItem<String>(value: e, child: Text(e)),
-                      )
-                      .toList(),
+    return ListView(
+      children: <Widget>[
+        ListTile(
+          title: Text('Org File'),
+          subtitle: Text('OrgファイルのURL'),
+          onTap: () {
+            context.read<PreferenceViewStateNotifier>().setViewType(
+              PreferenceViewType.orgUrl,
+            );
+          },
+        ),
+        ListTile(
+          title: Text('TODO Keyword'),
+          subtitle: Text('完了のTODOと認識するキーワード'),
+          onTap: () {
+            context.read<PreferenceViewStateNotifier>().setViewType(
+              PreferenceViewType.todo,
+            );
+          },
+        ),
+        ListTile(
+          title: Text('DONE Keyword'),
+          subtitle: Text('未完了のTODOと認識するキーワード'),
+          onTap: () {
+            context.read<PreferenceViewStateNotifier>().setViewType(
+              PreferenceViewType.done,
+            );
+          },
+        ),
+        ListTile(
+          title: Text('Font face'),
+          trailing: DropdownButton(
+            value: context.select<PreferenceViewState, String>(
+              (state) => state.fontFace,
             ),
+            onChanged: (String? newValue) {
+              if (newValue == null) return;
+              context.read<PreferenceViewStateNotifier>().setFontFace(newValue);
+            },
+            items:
+                fontFaces
+                    .map<DropdownMenuItem<String>>(
+                      (e) => DropdownMenuItem<String>(value: e, child: Text(e)),
+                    )
+                    .toList(),
           ),
-          ListTile(
-            title: Text('Font size'),
-            trailing: DropdownButton(
-              value:
-                  context
-                      .select<PreferenceViewState, int>(
-                        (state) => state.fontSize,
-                      )
-                      .toString(),
-              onChanged: (String? newValue) {
-                if (newValue == null) return;
-                context.read<PreferenceViewStateNotifier>().setFontSize(
-                  int.parse(newValue),
-                );
-              },
-              items:
-                  fontSize
-                      .map<DropdownMenuItem<String>>(
-                        (e) => DropdownMenuItem<String>(
-                          value: e.toString(),
-                          child: Text(e.toString()),
-                        ),
-                      )
-                      .toList(),
-            ),
+        ),
+        ListTile(
+          title: Text('Font size'),
+          trailing: DropdownButton(
+            value:
+                context
+                    .select<PreferenceViewState, int>((state) => state.fontSize)
+                    .toString(),
+            onChanged: (String? newValue) {
+              if (newValue == null) return;
+              context.read<PreferenceViewStateNotifier>().setFontSize(
+                int.parse(newValue),
+              );
+            },
+            items:
+                fontSize
+                    .map<DropdownMenuItem<String>>(
+                      (e) => DropdownMenuItem<String>(
+                        value: e.toString(),
+                        child: Text(e.toString()),
+                      ),
+                    )
+                    .toList(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _PreferenceInputView extends StatelessWidget {
+class PreferenceInputView extends StatelessWidget {
+  const PreferenceInputView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    var _viewType = context.select<PreferenceViewState, PreferenceViewType>(
+    var viewType = context.select<PreferenceViewState, PreferenceViewType>(
       (state) => state.viewType,
     );
-    var _items = <String>[];
-    switch (_viewType) {
+    var preferenceViewStateNotifier =
+        context.read<PreferenceViewStateNotifier>();
+    var items = <String>[];
+    switch (viewType) {
       case PreferenceViewType.orgUrl:
-        _items = context.select<PreferenceViewState, List<String>>(
+        items = context.select<PreferenceViewState, List<String>>(
           (state) => state.urls,
         );
         break;
       case PreferenceViewType.todo:
-        _items = context.select<PreferenceViewState, List<String>>(
+        items = context.select<PreferenceViewState, List<String>>(
           (state) => state.todoKeywords,
         );
         break;
       case PreferenceViewType.done:
-        _items = context.select<PreferenceViewState, List<String>>(
+        items = context.select<PreferenceViewState, List<String>>(
           (state) => state.doneKeywords,
         );
         break;
       default:
-        _items = [];
+        items = [];
     }
     return Scaffold(
-      body: Container(
-        child: ListView.builder(
-          itemCount: _items.length,
-          itemBuilder:
-              (BuildContext context, int index) => ListTile(
-                title: Text(_items[index]),
-                onLongPress: () {
-                  switch (_viewType) {
-                    case PreferenceViewType.orgUrl:
-                      context.read<PreferenceViewStateNotifier>().setUrls(
-                        List.from(_items)..removeAt(index),
-                      );
-                      break;
-                    case PreferenceViewType.todo:
-                      context
-                          .read<PreferenceViewStateNotifier>()
-                          .setTodoKeywords(List.from(_items)..removeAt(index));
-                      break;
-                    case PreferenceViewType.done:
-                      context
-                          .read<PreferenceViewStateNotifier>()
-                          .setDoneKeywords(List.from(_items)..removeAt(index));
-                      break;
-                    default:
-                      null;
-                  }
-                },
-              ),
-        ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder:
+            (BuildContext context, int index) => ListTile(
+              title: Text(items[index]),
+              onLongPress: () {
+                switch (viewType) {
+                  case PreferenceViewType.orgUrl:
+                    preferenceViewStateNotifier.setUrls(
+                      List.from(items)..removeAt(index),
+                    );
+                    break;
+                  case PreferenceViewType.todo:
+                    preferenceViewStateNotifier.setTodoKeywords(
+                      List.from(items)..removeAt(index),
+                    );
+                    break;
+                  case PreferenceViewType.done:
+                    preferenceViewStateNotifier.setDoneKeywords(
+                      List.from(items)..removeAt(index),
+                    );
+                    break;
+                  default:
+                    null;
+                }
+              },
+            ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         onPressed: () async {
           final result = await _buildInputDialog(context, 'Input File Url');
           if (result != null) {
-            switch (_viewType) {
+            switch (viewType) {
               case PreferenceViewType.orgUrl:
-                context.read<PreferenceViewStateNotifier>().setUrls(
-                  List.from(_items)..add(result),
+                preferenceViewStateNotifier.setUrls(
+                  List.from(items)..add(result),
                 );
                 break;
               case PreferenceViewType.todo:
-                context.read<PreferenceViewStateNotifier>().setTodoKeywords(
-                  List.from(_items)..add(result),
+                preferenceViewStateNotifier.setTodoKeywords(
+                  List.from(items)..add(result),
                 );
                 break;
               case PreferenceViewType.done:
-                context.read<PreferenceViewStateNotifier>().setDoneKeywords(
-                  List.from(_items)..add(result),
+                preferenceViewStateNotifier.setDoneKeywords(
+                  List.from(items)..add(result),
                 );
                 break;
               default:

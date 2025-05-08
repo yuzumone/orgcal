@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class SearchView extends StatelessWidget {
   final List<File> files;
 
-  SearchView({Key? key, required this.files}) : super(key: key);
+  const SearchView({super.key, required this.files});
 
   @override
   Widget build(BuildContext context) {
@@ -35,39 +35,37 @@ class SearchView extends StatelessWidget {
               ),
         ),
       ),
-      body: Container(
-        child: ListView.builder(
-          itemCount: result.length,
-          itemBuilder:
-              (BuildContext context, int index) => ListTile(
-                contentPadding: EdgeInsets.only(
-                  left: 16.0,
-                  right: 16.0,
-                  top: 8.0,
-                  bottom: 8.0,
-                ),
-                title: Text(result[index].chunks.first),
-                subtitle: Text(
-                  result[index].chunks.skip(1).join('\n'),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                onTap:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => StateNotifierProvider<
-                              DetailViewStateNotifier,
-                              DetailViewState
-                            >(
-                              create: (_) => DetailViewStateNotifier(),
-                              child: DetailView(headline: result[index]),
-                            ),
-                      ),
-                    ),
+      body: ListView.builder(
+        itemCount: result.length,
+        itemBuilder:
+            (BuildContext context, int index) => ListTile(
+              contentPadding: EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 8.0,
+                bottom: 8.0,
               ),
-        ),
+              title: Text(result[index].chunks.first),
+              subtitle: Text(
+                result[index].chunks.skip(1).join('\n'),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              onTap:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => StateNotifierProvider<
+                            DetailViewStateNotifier,
+                            DetailViewState
+                          >(
+                            create: (_) => DetailViewStateNotifier(),
+                            child: DetailView(headline: result[index]),
+                          ),
+                    ),
+                  ),
+            ),
       ),
     );
   }

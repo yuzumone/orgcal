@@ -27,7 +27,7 @@ class DetailViewStateNotifier extends StateNotifier<DetailViewState>
   }
 
   Future<void> init() async {
-    var _pref = await _preferenceRepository.getPreference();
-    state = state.copyWith(fontFace: _pref.fontFace, fontSize: _pref.fontSize);
+    var pref = await _preferenceRepository.getPreference();
+    state = state.copyWith(fontFace: pref.fontFace, fontSize: pref.fontSize);
   }
 }

@@ -32,13 +32,13 @@ class PreferenceViewStateNotifier extends StateNotifier<PreferenceViewState>
   }
 
   Future<void> init() async {
-    var _pref = await _preferenceRepository.getPreference();
+    var pref = await _preferenceRepository.getPreference();
     state = state.copyWith(
-      urls: _pref.urls,
-      todoKeywords: _pref.todoKeywords,
-      doneKeywords: _pref.doneKeywords,
-      fontFace: _pref.fontFace,
-      fontSize: _pref.fontSize,
+      urls: pref.urls,
+      todoKeywords: pref.todoKeywords,
+      doneKeywords: pref.doneKeywords,
+      fontFace: pref.fontFace,
+      fontSize: pref.fontSize,
     );
   }
 

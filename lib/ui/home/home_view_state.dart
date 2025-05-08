@@ -34,13 +34,13 @@ class HomeViewStateNotifier extends StateNotifier<HomeViewState>
   }
 
   Future<void> init() async {
-    var _pref = await _preferenceRepository.getPreference();
-    var _keywords = _pref.todoKeywords + _pref.doneKeywords;
-    var _files = await _fileRepository.getWebFiles(_pref.urls, _keywords);
+    var pref = await _preferenceRepository.getPreference();
+    var keywords = pref.todoKeywords + pref.doneKeywords;
+    var files = await _fileRepository.getWebFiles(pref.urls, keywords);
     state = state.copyWith(
-      files: _files,
-      todoKeywords: _pref.todoKeywords,
-      doneKeywords: _pref.doneKeywords,
+      files: files,
+      todoKeywords: pref.todoKeywords,
+      doneKeywords: pref.doneKeywords,
     );
   }
 
