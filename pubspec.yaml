@@ -17,7 +17,7 @@ dependencies:
   http_retry: ^0.2.0
   state_notifier: ^0.7.0
   flutter_state_notifier: ^0.7.0
-  freezed_annotation: ^0.14.1
+  freezed_annotation: ^3.0.0
   flutter_launcher_icons: ^0.9.0
   intl: ^0.19.0
   org_parser:
@@ -27,9 +27,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  json_serializable: ^4.1.0
   build_runner:
-  freezed: ^0.14.1+1
+  freezed: ^3.0.6
 
 flutter:
   uses-material-design: true
