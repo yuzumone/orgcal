@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
 class TodoView extends StatelessWidget {
+  const TodoView({super.key});
+
   @override
   Widget build(BuildContext context) {
     var files = context.select<HomeViewState, List<File>>(
@@ -51,13 +53,11 @@ class TodoView extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        child: Container(
-          child: Text(
-            headline.title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.red),
-          ),
+        child: Text(
+          headline.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(color: Colors.red),
         ),
       ),
     );

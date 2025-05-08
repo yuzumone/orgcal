@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
 class FilesView extends StatelessWidget {
+  const FilesView({super.key});
+
   @override
   Widget build(BuildContext context) {
     var files = context.select<HomeViewState, List<File>>(
@@ -29,7 +31,7 @@ class FilesView extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder:
-                      (context) => _HeadlineListView(
+                      (context) => HeadlineListView(
                         name: files[index].name,
                         org: files[index].org,
                         todoKeywords: todoKeywords,
@@ -43,50 +45,48 @@ class FilesView extends StatelessWidget {
   }
 }
 
-class _HeadlineListView extends StatelessWidget {
+class HeadlineListView extends StatelessWidget {
   final String name;
   final OrgFile org;
   final List<String> todoKeywords;
   final List<String> doneKeywords;
 
-  _HeadlineListView({
-    Key? key,
+  const HeadlineListView({
+    super.key,
     required this.name,
     required this.org,
     required this.todoKeywords,
     required this.doneKeywords,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(name)),
-      body: Container(
-        child: ListView.builder(
-          itemCount: org.headlines.length,
-          itemBuilder:
-              (BuildContext context, int index) => _HeadlineView(
-                headline: org.headlines[index],
-                todoKeywords: todoKeywords,
-                doneKeywords: doneKeywords,
-              ),
-        ),
+      body: ListView.builder(
+        itemCount: org.headlines.length,
+        itemBuilder:
+            (BuildContext context, int index) => HeadlineView(
+              headline: org.headlines[index],
+              todoKeywords: todoKeywords,
+              doneKeywords: doneKeywords,
+            ),
       ),
     );
   }
 }
 
-class _HeadlineView extends StatelessWidget {
+class HeadlineView extends StatelessWidget {
   final Headline headline;
   final List<String> todoKeywords;
   final List<String> doneKeywords;
 
-  _HeadlineView({
-    Key? key,
+  const HeadlineView({
+    super.key,
     required this.headline,
     required this.todoKeywords,
     required this.doneKeywords,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

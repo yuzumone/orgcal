@@ -10,6 +10,8 @@ import 'package:orgcal/ui/todo/todo_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
+  HomeView({super.key});
+
   final List<Widget> _listWidgets = <Widget>[
     FilesView(),
     AgendaView(),

@@ -11,6 +11,8 @@ import 'package:org_parser/org_parser.dart';
 class AgendaView extends StatelessWidget {
   final format = DateFormat('EEEE\tdd\tMMM\ty');
 
+  AgendaView({super.key});
+
   @override
   Widget build(BuildContext context) {
     var files = context.select<HomeViewState, List<File>>(
@@ -94,19 +96,19 @@ class AgendaView extends StatelessWidget {
           7,
         ).map((e) => DateTime(start.year, start.month, start.day + e)).toList();
     var items = <dynamic>[];
-    dates.forEach((x) {
+    for (var x in dates) {
       items.add(x);
       var diff = now.difference(x);
       if (0 <= diff.inHours && diff.inHours < 24) {
         items.addAll(overAgendaList);
       }
-      agendaList.forEach((y) {
+      for (var y in agendaList) {
         var diff = y.scheduledDateTime!.difference(x);
         if (0 <= diff.inHours && diff.inHours < 24) {
           items.add(y);
         }
-      });
-    });
+      }
+    }
     return items;
   }
 
@@ -165,31 +167,27 @@ class AgendaView extends StatelessWidget {
           children: <Widget>[
             Expanded(
               flex: 2,
-              child: Container(
-                child: Text(
-                  headline.scheduled!,
-                  style: TextStyle(
-                    color:
-                        todoKeyword.contains(headline.keyword)
-                            ? Colors.red
-                            : Colors.green,
-                  ),
+              child: Text(
+                headline.scheduled!,
+                style: TextStyle(
+                  color:
+                      todoKeyword.contains(headline.keyword)
+                          ? Colors.red
+                          : Colors.green,
                 ),
               ),
             ),
             Expanded(
               flex: 3,
-              child: Container(
-                child: Text(
-                  headline.title,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color:
-                        todoKeyword.contains(headline.keyword)
-                            ? Colors.red
-                            : Colors.green,
-                  ),
+              child: Text(
+                headline.title,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: TextStyle(
+                  color:
+                      todoKeyword.contains(headline.keyword)
+                          ? Colors.red
+                          : Colors.green,
                 ),
               ),
             ),
