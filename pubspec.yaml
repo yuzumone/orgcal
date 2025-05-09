@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared_preferences: ^2.5.3
+  shared_preferences_platform_interface: ^2.4.1
   provider: ^5.0.0
   http: ^0.13.1
   http_retry: ^0.2.0
