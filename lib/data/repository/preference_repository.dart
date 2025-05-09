@@ -10,38 +10,40 @@ class PreferenceRepository {
   PreferenceRepository();
 
   Future<Preference> getPreference() async {
-    var prefs = await SharedPreferences.getInstance();
-    var urls = prefs.getStringList(argUrls) ?? [];
-    var todoKeywords = prefs.getStringList(argTodoKeywords) ?? ['TODO'];
-    var doneKeywords = prefs.getStringList(argDoneKeywords) ?? ['DONE'];
-    var fontFace = prefs.getString(argFontFace) ?? 'Myrica';
-    var fontSize = prefs.getInt(argFontSize) ?? 16;
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    final urls = await asyncPrefs.getStringList(argUrls) ?? [];
+    final todoKeywords =
+        await asyncPrefs.getStringList(argTodoKeywords) ?? ['TODO'];
+    final doneKeywords =
+        await asyncPrefs.getStringList(argDoneKeywords) ?? ['DONE'];
+    final fontFace = await asyncPrefs.getString(argFontFace) ?? 'Myrica';
+    final fontSize = await asyncPrefs.getInt(argFontSize) ?? 16;
     return Preference(urls, todoKeywords, doneKeywords, fontFace, fontSize);
   }
 
   void setUrls(List<String> urls) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(argUrls, urls);
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setStringList(argUrls, urls);
   }
 
   void setTodoKeywords(List<String> todoKeywords) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(argTodoKeywords, todoKeywords);
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setStringList(argTodoKeywords, todoKeywords);
   }
 
   void setDoneKeywords(List<String> doneKeywords) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(argDoneKeywords, doneKeywords);
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setStringList(argDoneKeywords, doneKeywords);
   }
 
   void setFontFace(String fontFace) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setString(argFontFace, fontFace);
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setString(argFontFace, fontFace);
   }
 
   void setFontSize(int fontSize) async {
-    var prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(argFontSize, fontSize);
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setInt(argFontSize, fontSize);
   }
 }
 
