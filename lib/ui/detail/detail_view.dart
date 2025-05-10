@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/ui/detail/detail_view_state.dart';
-import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
-class DetailView extends StatelessWidget {
+class DetailView extends ConsumerWidget {
   final Headline headline;
 
   const DetailView({super.key, required this.headline});
 
   @override
-  Widget build(BuildContext context) {
-    var fontFace = context.select<DetailViewState, String>(
-      (state) => state.fontFace,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fontFace = ref.watch(
+      detailViewStateNotifierProvider.select((v) => v.fontFace),
     );
-    var fontSize = context.select<DetailViewState, int>(
-      (state) => state.fontSize,
+    final fontSize = ref.watch(
+      detailViewStateNotifierProvider.select((v) => v.fontSize),
     );
+
     return Scaffold(
       appBar: AppBar(),
       body: Container(

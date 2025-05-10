@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:orgcal/data/model/file.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/ui/agenda/agenda_view.dart';
 import 'package:orgcal/ui/file/file_view.dart';
 import 'package:orgcal/ui/home/home_view_state.dart';
 import 'package:orgcal/ui/search/search_view.dart';
-import 'package:orgcal/ui/search/search_view_state.dart';
 import 'package:orgcal/ui/todo/todo_view.dart';
-import 'package:provider/provider.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends ConsumerWidget {
   HomeView({super.key});
 
   final List<Widget> _listWidgets = <Widget>[
@@ -19,13 +16,15 @@ class HomeView extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    var pageIndex = context.select<HomeViewState, int>(
-      (state) => state.pageIndex,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(homeViewStateNotifierProvider.notifier);
+    final pageIndex = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.pageIndex),
     );
-    var files = context.select<HomeViewState, List<File>>(
-      (state) => state.files,
+    final files = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.files),
     );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Org Mobile'),
@@ -33,18 +32,13 @@ class HomeView extends StatelessWidget {
           pageIndex == 1
               ? IconButton(
                 icon: Icon(Icons.chevron_left),
-                onPressed:
-                    () =>
-                        context
-                            .read<HomeViewStateNotifier>()
-                            .subtractWeekDiff(),
+                onPressed: () => notifier.subtractWeekDiff(),
               )
               : Container(),
           pageIndex == 1
               ? IconButton(
                 icon: Icon(Icons.chevron_right),
-                onPressed:
-                    () => context.read<HomeViewStateNotifier>().addWeekDiff(),
+                onPressed: () => notifier.addWeekDiff(),
               )
               : Container(),
           IconButton(
@@ -61,21 +55,22 @@ class HomeView extends StatelessWidget {
             () => Navigator.push(
               context,
               MaterialPageRoute(
-                builder:
-                    (context) => StateNotifierProvider<
-                      SearchViewStateNotifier,
-                      SearchViewState
-                    >(
-                      create: (_) => SearchViewStateNotifier(),
-                      child: SearchView(files: files),
-                    ),
+                builder: (BuildContext context) => SearchView(files: files),
+                // builder:
+                //     (context) => StateNotifierProvider<
+                //       SearchViewStateNotifier,
+                //       SearchViewState
+                //     >(
+                //       create: (_) => SearchViewStateNotifier(),
+                //       child: SearchView(files: files),
+                //     ),
               ),
             ),
         child: Icon(Icons.search, color: Colors.white),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
-        onTap: (index) => context.read<HomeViewStateNotifier>().setIndex(index),
+        onTap: (index) => notifier.setIndex(index),
         selectedItemColor: Colors.blue,
         items: [
           BottomNavigationBarItem(

@@ -1,4 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'preference_repository.g.dart';
+
+@riverpod
+PreferenceRepository preferenceRepository(Ref ref) {
+  return PreferenceRepository();
+}
 
 class PreferenceRepository {
   static const argUrls = 'urls';

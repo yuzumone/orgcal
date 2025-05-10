@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/data/model/preference_view_type.dart';
 import 'package:orgcal/ui/preference/preference_view_state.dart';
-import 'package:provider/provider.dart';
 
-class PreferenceView extends StatelessWidget {
+class PreferenceView extends ConsumerWidget {
   const PreferenceView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var viewType = context.select<PreferenceViewState, PreferenceViewType>(
-      (state) => state.viewType,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(preferenceViewStateNotifierProvider.notifier);
+    final viewType = ref.watch(
+      preferenceViewStateNotifierProvider.select((v) => v.viewType),
     );
-    var preferenceViewStateNotifier =
-        context.read<PreferenceViewStateNotifier>();
+
     return PopScope(
       canPop: viewType == PreferenceViewType.main,
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop) {
           return;
         }
-        preferenceViewStateNotifier.setViewType(PreferenceViewType.main);
+        notifier.setViewType(PreferenceViewType.main);
       },
       child: Scaffold(
         appBar: AppBar(
@@ -30,9 +30,7 @@ class PreferenceView extends StatelessWidget {
                   : IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () {
-                      context.read<PreferenceViewStateNotifier>().setViewType(
-                        PreferenceViewType.main,
-                      );
+                      notifier.setViewType(PreferenceViewType.main);
                     },
                   ),
         ),
@@ -80,7 +78,7 @@ Future<String?> _buildInputDialog(BuildContext context, String title) async {
   );
 }
 
-class MainPreferenceView extends StatelessWidget {
+class MainPreferenceView extends ConsumerWidget {
   const MainPreferenceView({super.key});
 
   static const fontFaces = ['Myrica', 'Cica', 'SourceHanCodeJP', 'HackGen'];
@@ -103,45 +101,44 @@ class MainPreferenceView extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(preferenceViewStateNotifierProvider.notifier);
+
     return ListView(
       children: <Widget>[
         ListTile(
           title: Text('Org File'),
           subtitle: Text('OrgファイルのURL'),
           onTap: () {
-            context.read<PreferenceViewStateNotifier>().setViewType(
-              PreferenceViewType.orgUrl,
-            );
+            notifier.setViewType(PreferenceViewType.orgUrl);
           },
         ),
         ListTile(
           title: Text('TODO Keyword'),
           subtitle: Text('完了のTODOと認識するキーワード'),
           onTap: () {
-            context.read<PreferenceViewStateNotifier>().setViewType(
-              PreferenceViewType.todo,
-            );
+            notifier.setViewType(PreferenceViewType.todo);
           },
         ),
         ListTile(
           title: Text('DONE Keyword'),
           subtitle: Text('未完了のTODOと認識するキーワード'),
           onTap: () {
-            context.read<PreferenceViewStateNotifier>().setViewType(
-              PreferenceViewType.done,
-            );
+            notifier.setViewType(PreferenceViewType.done);
           },
         ),
         ListTile(
           title: Text('Font face'),
           trailing: DropdownButton(
-            value: context.select<PreferenceViewState, String>(
-              (state) => state.fontFace,
+            value: ref.watch(
+              preferenceViewStateNotifierProvider.select((v) => v.fontFace),
             ),
+            // context.select<PreferenceViewState, String>(
+            //   (state) => state.fontFace,
+            // ),
             onChanged: (String? newValue) {
               if (newValue == null) return;
-              context.read<PreferenceViewStateNotifier>().setFontFace(newValue);
+              notifier.setFontFace(newValue);
             },
             items:
                 fontFaces
@@ -155,14 +152,19 @@ class MainPreferenceView extends StatelessWidget {
           title: Text('Font size'),
           trailing: DropdownButton(
             value:
-                context
-                    .select<PreferenceViewState, int>((state) => state.fontSize)
+                ref
+                    .watch(
+                      preferenceViewStateNotifierProvider.select(
+                        (v) => v.fontSize,
+                      ),
+                    )
                     .toString(),
+            // context
+            //     .select<PreferenceViewState, int>((state) => state.fontSize)
+            //     .toString(),
             onChanged: (String? newValue) {
               if (newValue == null) return;
-              context.read<PreferenceViewStateNotifier>().setFontSize(
-                int.parse(newValue),
-              );
+              notifier.setFontSize(int.parse(newValue));
             },
             items:
                 fontSize
@@ -180,31 +182,30 @@ class MainPreferenceView extends StatelessWidget {
   }
 }
 
-class PreferenceInputView extends StatelessWidget {
+class PreferenceInputView extends ConsumerWidget {
   const PreferenceInputView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var viewType = context.select<PreferenceViewState, PreferenceViewType>(
-      (state) => state.viewType,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(preferenceViewStateNotifierProvider.notifier);
+    final viewType = ref.watch(
+      preferenceViewStateNotifierProvider.select((v) => v.viewType),
     );
-    var preferenceViewStateNotifier =
-        context.read<PreferenceViewStateNotifier>();
     var items = <String>[];
     switch (viewType) {
       case PreferenceViewType.orgUrl:
-        items = context.select<PreferenceViewState, List<String>>(
-          (state) => state.urls,
+        items = ref.watch(
+          preferenceViewStateNotifierProvider.select((v) => v.urls),
         );
         break;
       case PreferenceViewType.todo:
-        items = context.select<PreferenceViewState, List<String>>(
-          (state) => state.todoKeywords,
+        items = ref.watch(
+          preferenceViewStateNotifierProvider.select((v) => v.todoKeywords),
         );
         break;
       case PreferenceViewType.done:
-        items = context.select<PreferenceViewState, List<String>>(
-          (state) => state.doneKeywords,
+        items = ref.watch(
+          preferenceViewStateNotifierProvider.select((v) => v.doneKeywords),
         );
         break;
       default:
@@ -219,19 +220,13 @@ class PreferenceInputView extends StatelessWidget {
               onLongPress: () {
                 switch (viewType) {
                   case PreferenceViewType.orgUrl:
-                    preferenceViewStateNotifier.setUrls(
-                      List.from(items)..removeAt(index),
-                    );
+                    notifier.setUrls(List.from(items)..removeAt(index));
                     break;
                   case PreferenceViewType.todo:
-                    preferenceViewStateNotifier.setTodoKeywords(
-                      List.from(items)..removeAt(index),
-                    );
+                    notifier.setTodoKeywords(List.from(items)..removeAt(index));
                     break;
                   case PreferenceViewType.done:
-                    preferenceViewStateNotifier.setDoneKeywords(
-                      List.from(items)..removeAt(index),
-                    );
+                    notifier.setDoneKeywords(List.from(items)..removeAt(index));
                     break;
                   default:
                     null;
@@ -246,19 +241,13 @@ class PreferenceInputView extends StatelessWidget {
           if (result != null) {
             switch (viewType) {
               case PreferenceViewType.orgUrl:
-                preferenceViewStateNotifier.setUrls(
-                  List.from(items)..add(result),
-                );
+                notifier.setUrls(List.from(items)..add(result));
                 break;
               case PreferenceViewType.todo:
-                preferenceViewStateNotifier.setTodoKeywords(
-                  List.from(items)..add(result),
-                );
+                notifier.setTodoKeywords(List.from(items)..add(result));
                 break;
               case PreferenceViewType.done:
-                preferenceViewStateNotifier.setDoneKeywords(
-                  List.from(items)..add(result),
-                );
+                notifier.setDoneKeywords(List.from(items)..add(result));
                 break;
               default:
                 null;

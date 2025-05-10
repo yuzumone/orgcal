@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:orgcal/data/model/file.dart';
 import 'package:orgcal/ui/detail/detail_view.dart';
-import 'package:orgcal/ui/detail/detail_view_state.dart';
 import 'package:orgcal/ui/home/home_view_state.dart';
-import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
-class AgendaView extends StatelessWidget {
+class AgendaView extends ConsumerWidget {
   final format = DateFormat('EEEE\tdd\tMMM\ty');
 
   AgendaView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var files = context.select<HomeViewState, List<File>>(
-      (state) => state.files,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final files = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.files),
     );
-    var todoKeywords = context.select<HomeViewState, List<String>>(
-      (state) => state.todoKeywords,
+    final todoKeywords = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.todoKeywords),
     );
-    var doneKeywords = context.select<HomeViewState, List<String>>(
-      (state) => state.doneKeywords,
+    final doneKeywords = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.doneKeywords),
     );
-    var weekDiff = context.select<HomeViewState, int>(
-      (state) => state.weekDiff,
+    final weekDiff = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.weekDiff),
     );
-    var now = DateTime.now();
-    var basis = now.add(Duration(days: weekDiff * 7));
-    var agenda = _getAgendaList(files, basis);
-    var over = _getOvertimeAgendaList(files, basis, todoKeywords);
-    var items = _createListItems(now, basis, agenda, over);
+    final now = DateTime.now();
+    final basis = now.add(Duration(days: weekDiff * 7));
+    final agenda = _getAgendaList(files, basis);
+    final over = _getOvertimeAgendaList(files, basis, todoKeywords);
+    final items = _createListItems(now, basis, agenda, over);
     return ListView.builder(
       itemCount: items.length,
       itemBuilder:
@@ -150,14 +148,7 @@ class AgendaView extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => StateNotifierProvider<
-                  DetailViewStateNotifier,
-                  DetailViewState
-                >(
-                  create: (_) => DetailViewStateNotifier(),
-                  child: DetailView(headline: headline),
-                ),
+            builder: (context) => DetailView(headline: headline),
           ),
         );
       },
