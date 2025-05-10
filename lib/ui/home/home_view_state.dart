@@ -3,8 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:orgcal/data/model/file.dart';
 import 'package:orgcal/data/repository/file_repository.dart';
 import 'package:orgcal/data/repository/preference_repository.dart';
-import 'package:state_notifier/state_notifier.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'home_view_state.g.dart';
 part 'home_view_state.freezed.dart';
 
 @freezed
@@ -19,24 +20,20 @@ abstract class HomeViewState with _$HomeViewState {
   }) = _HomeViewState;
 }
 
-class HomeViewStateNotifier extends StateNotifier<HomeViewState>
-    with LocatorMixin {
-  PreferenceRepository get _preferenceRepository =>
-      read<PreferenceRepository>();
-  FileRepository get _fileRepository => read<FileRepository>();
-
-  HomeViewStateNotifier() : super(const HomeViewState());
-
+@riverpod
+class HomeViewStateNotifier extends _$HomeViewStateNotifier {
   @override
-  void initState() {
-    super.initState();
+  HomeViewState build() {
     init();
+    return const HomeViewState();
   }
 
   Future<void> init() async {
-    var pref = await _preferenceRepository.getPreference();
-    var keywords = pref.todoKeywords + pref.doneKeywords;
-    var files = await _fileRepository.getWebFiles(pref.urls, keywords);
+    final preferenceRepository = ref.read(preferenceRepositoryProvider);
+    final fileRepository = ref.read(fileRepositoryProvider);
+    final pref = await preferenceRepository.getPreference();
+    final keywords = pref.todoKeywords + pref.doneKeywords;
+    final files = await fileRepository.getWebFiles(pref.urls, keywords);
     state = state.copyWith(
       files: files,
       todoKeywords: pref.todoKeywords,

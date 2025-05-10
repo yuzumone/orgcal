@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:orgcal/data/repository/preference_repository.dart';
-import 'package:state_notifier/state_notifier.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'detail_view_state.g.dart';
 part 'detail_view_state.freezed.dart';
 
 @freezed
@@ -13,21 +14,17 @@ abstract class DetailViewState with _$DetailViewState {
   }) = _DetailViewState;
 }
 
-class DetailViewStateNotifier extends StateNotifier<DetailViewState>
-    with LocatorMixin {
-  PreferenceRepository get _preferenceRepository =>
-      read<PreferenceRepository>();
-
-  DetailViewStateNotifier() : super(const DetailViewState());
-
+@riverpod
+class DetailViewStateNotifier extends _$DetailViewStateNotifier {
   @override
-  void initState() {
-    super.initState();
+  DetailViewState build() {
     init();
+    return const DetailViewState();
   }
 
   Future<void> init() async {
-    var pref = await _preferenceRepository.getPreference();
+    final repository = ref.read(preferenceRepositoryProvider);
+    final pref = await repository.getPreference();
     state = state.copyWith(fontFace: pref.fontFace, fontSize: pref.fontSize);
   }
 }

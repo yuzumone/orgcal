@@ -1,8 +1,17 @@
 import 'dart:convert' show utf8;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_retry/http_retry.dart';
 import 'package:org_parser/org_parser.dart';
 import 'package:orgcal/data/model/file.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'file_repository.g.dart';
+
+@riverpod
+FileRepository fileRepository(Ref ref) {
+  return FileRepository();
+}
 
 class FileRepository {
   late final RetryClient client;

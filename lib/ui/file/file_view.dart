@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:orgcal/data/model/file.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/ui/detail/detail_view.dart';
-import 'package:orgcal/ui/detail/detail_view_state.dart';
 import 'package:orgcal/ui/home/home_view_state.dart';
-import 'package:provider/provider.dart';
 import 'package:org_parser/org_parser.dart';
 
-class FilesView extends StatelessWidget {
+class FilesView extends ConsumerWidget {
   const FilesView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var files = context.select<HomeViewState, List<File>>(
-      (state) => state.files,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final files = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.files),
     );
-    var todoKeywords = context.select<HomeViewState, List<String>>(
-      (state) => state.todoKeywords,
+    final todoKeywords = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.todoKeywords),
     );
-    var doneKeywords = context.select<HomeViewState, List<String>>(
-      (state) => state.doneKeywords,
+    final doneKeywords = ref.watch(
+      homeViewStateNotifierProvider.select((v) => v.doneKeywords),
     );
+
     return ListView.builder(
       itemCount: files.length,
       itemBuilder:
@@ -95,14 +93,7 @@ class HeadlineView extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => StateNotifierProvider<
-                  DetailViewStateNotifier,
-                  DetailViewState
-                >(
-                  create: (_) => DetailViewStateNotifier(),
-                  child: DetailView(headline: headline),
-                ),
+            builder: (context) => DetailView(headline: headline),
           ),
         );
       },

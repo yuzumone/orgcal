@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:orgcal/data/repository/file_repository.dart';
-import 'package:orgcal/data/repository/preference_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/ui/home/home_view.dart';
-import 'package:orgcal/ui/home/home_view_state.dart';
 import 'package:orgcal/ui/preference/preference_view.dart';
-import 'package:orgcal/ui/preference/preference_view_state.dart';
-import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        Provider<PreferenceRepository>(create: (_) => PreferenceRepository()),
-        Provider<FileRepository>(create: (_) => FileRepository()),
-      ],
-      child: MyApp(),
-    ),
-  );
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,19 +26,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: <String, WidgetBuilder>{
-        '/':
-            (_) => StateNotifierProvider<HomeViewStateNotifier, HomeViewState>(
-              create: (_) => HomeViewStateNotifier(),
-              child: HomeView(),
-            ),
-        '/preference':
-            (_) => StateNotifierProvider<
-              PreferenceViewStateNotifier,
-              PreferenceViewState
-            >(
-              create: (_) => PreferenceViewStateNotifier(),
-              child: PreferenceView(),
-            ),
+        '/': (_) => HomeView(),
+        '/preference': (_) => PreferenceView(),
       },
     );
   }

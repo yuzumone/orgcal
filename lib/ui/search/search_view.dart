@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
-import 'package:org_parser/org_parser.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/data/model/file.dart';
 import 'package:orgcal/ui/detail/detail_view.dart';
-import 'package:orgcal/ui/detail/detail_view_state.dart';
 import 'package:orgcal/ui/search/search_view_state.dart';
-import 'package:provider/provider.dart';
 
-class SearchView extends StatelessWidget {
+class SearchView extends ConsumerWidget {
   final List<File> files;
 
   const SearchView({super.key, required this.files});
 
   @override
-  Widget build(BuildContext context) {
-    var headlines = files.map((e) => e.org.headlines).expand((e) => e).toList();
-    var result = context.select<SearchViewState, List<Headline>>(
-      (state) => state.result,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final headlines =
+        files.map((e) => e.org.headlines).expand((e) => e).toList();
+    final notifier = ref.read(searchViewStateNotifierProvider.notifier);
+    final result = ref.watch(
+      searchViewStateNotifierProvider.select((v) => v.result),
     );
+
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -30,7 +30,7 @@ class SearchView extends StatelessWidget {
             hintStyle: TextStyle(color: Colors.white),
           ),
           onSubmitted:
-              (value) => context.read<SearchViewStateNotifier>().setResult(
+              (value) => notifier.setResult(
                 headlines.where((e) => e.raw.contains(value)).toList(),
               ),
         ),
@@ -56,13 +56,16 @@ class SearchView extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder:
-                          (context) => StateNotifierProvider<
-                            DetailViewStateNotifier,
-                            DetailViewState
-                          >(
-                            create: (_) => DetailViewStateNotifier(),
-                            child: DetailView(headline: result[index]),
-                          ),
+                          (BuildContext context) =>
+                              DetailView(headline: result[index]),
+                      // builder:
+                      //     (context) => StateNotifierProvider<
+                      //       DetailViewStateNotifier,
+                      //       DetailViewState
+                      //     >(
+                      //       create: (_) => DetailViewStateNotifier(),
+                      //       child: DetailView(headline: result[index]),
+                      //     ),
                     ),
                   ),
             ),
