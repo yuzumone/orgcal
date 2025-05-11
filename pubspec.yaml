@@ -18,7 +18,7 @@ dependencies:
   http: ^0.13.1
   http_retry: ^0.2.0
   freezed_annotation: ^3.0.0
-  flutter_launcher_icons: ^0.9.0
+  flutter_launcher_icons: ^0.14.3
   intl: ^0.19.0
   org_parser:
     git: https://github.com/yuzumone/org_parser.git
