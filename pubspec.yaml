@@ -20,6 +20,7 @@ dependencies:
   freezed_annotation: ^3.0.0
   flutter_launcher_icons: ^0.14.3
   intl: ^0.19.0
+  device_calendar: ^4.3.3
   org_parser:
     git: https://github.com/yuzumone/org_parser.git
 
