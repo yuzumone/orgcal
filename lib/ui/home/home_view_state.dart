@@ -1,3 +1,4 @@
+import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:orgcal/data/model/file.dart';
@@ -25,6 +26,7 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
   @override
   HomeViewState build() {
     init();
+    requestPermissions();
     return const HomeViewState();
   }
 
@@ -39,6 +41,25 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
       todoKeywords: pref.todoKeywords,
       doneKeywords: pref.doneKeywords,
     );
+  }
+
+  void requestPermissions() async {
+    final deviceCalendarPlugin = DeviceCalendarPlugin();
+    try {
+      var permissionsGranted = await deviceCalendarPlugin.hasPermissions();
+      if (permissionsGranted.isSuccess &&
+          (permissionsGranted.data == null ||
+              permissionsGranted.data == false)) {
+        permissionsGranted = await deviceCalendarPlugin.requestPermissions();
+        if (!permissionsGranted.isSuccess ||
+            permissionsGranted.data == null ||
+            permissionsGranted.data == false) {
+          return;
+        }
+      }
+    } catch (e) {
+      // TODO
+    }
   }
 
   void setIndex(int index) => state = state.copyWith(pageIndex: index);
