@@ -506,7 +506,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e539849fff974fe3a2083b8979ae107e8e99bccb
+      resolved-ref: dcc210019ca21efe30617d6bed0d4e28e5d8d59f
       url: "https://github.com/yuzumone/org_parser.git"
     source: git
     version: "1.0.0"

@@ -121,12 +121,28 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
   }
 
   Event createEvent(String id, Headline headline) {
+    bool allDay = false;
+    TZDateTime? end;
     final location = getLocation('Asia/Tokyo'); // TODO
     final start = TZDateTime.from(headline.scheduledDateTime!, location);
-    final end = TZDateTime.from(
-      headline.scheduledDateTime!.add(Duration(hours: 1)),
-      location,
-    ); //TODO
+
+    if (headline.scheduled!.contains(':')) {
+      if (headline.scheduledEndDateTime != null) {
+        end = TZDateTime.from(headline.scheduledEndDateTime!, location);
+      } else {
+        end = TZDateTime.from(
+          headline.scheduledDateTime!.add(Duration(hours: 1)),
+          location,
+        );
+      }
+    } else {
+      allDay = true;
+      if (headline.scheduledEndDateTime != null) {
+        end = TZDateTime.from(headline.scheduledEndDateTime!, location);
+      } else {
+        end = TZDateTime.from(headline.scheduledDateTime!, location);
+      }
+    }
     final status = EventStatus.Confirmed;
     return Event(
       id,
@@ -135,7 +151,7 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
       start: start,
       end: end,
       status: status,
-      allDay: false,
+      allDay: allDay,
     );
   }
 
