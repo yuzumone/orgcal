@@ -81,7 +81,6 @@ Future<String?> _buildInputDialog(BuildContext context, String title) async {
 class MainPreferenceView extends ConsumerWidget {
   const MainPreferenceView({super.key});
 
-  static const fontFaces = ['Myrica', 'Cica', 'SourceHanCodeJP', 'HackGen'];
   static const fontSize = [
     10,
     11,
@@ -128,27 +127,6 @@ class MainPreferenceView extends ConsumerWidget {
           },
         ),
         ListTile(
-          title: Text('Font face'),
-          trailing: DropdownButton(
-            value: ref.watch(
-              preferenceViewStateNotifierProvider.select((v) => v.fontFace),
-            ),
-            // context.select<PreferenceViewState, String>(
-            //   (state) => state.fontFace,
-            // ),
-            onChanged: (String? newValue) {
-              if (newValue == null) return;
-              notifier.setFontFace(newValue);
-            },
-            items:
-                fontFaces
-                    .map<DropdownMenuItem<String>>(
-                      (e) => DropdownMenuItem<String>(value: e, child: Text(e)),
-                    )
-                    .toList(),
-          ),
-        ),
-        ListTile(
           title: Text('Font size'),
           trailing: DropdownButton(
             value:
@@ -159,9 +137,6 @@ class MainPreferenceView extends ConsumerWidget {
                       ),
                     )
                     .toString(),
-            // context
-            //     .select<PreferenceViewState, int>((state) => state.fontSize)
-            //     .toString(),
             onChanged: (String? newValue) {
               if (newValue == null) return;
               notifier.setFontSize(int.parse(newValue));

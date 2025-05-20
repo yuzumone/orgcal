@@ -10,9 +10,6 @@ class DetailView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final fontFace = ref.watch(
-      detailViewStateNotifierProvider.select((v) => v.fontFace),
-    );
     final fontSize = ref.watch(
       detailViewStateNotifierProvider.select((v) => v.fontSize),
     );
@@ -27,20 +24,14 @@ class DetailView extends ConsumerWidget {
             Flexible(
               child: Text(
                 headline.title,
-                style: TextStyle(
-                  fontSize: fontSize * 1.2,
-                  fontFamily: fontFace,
-                ),
+                style: TextStyle(fontSize: fontSize * 1.2),
               ),
             ),
             SizedBox(height: 16.0),
             Flexible(
               child: Text(
                 headline.chunks.skip(1).join('\n'),
-                style: TextStyle(
-                  fontSize: fontSize.toDouble(),
-                  fontFamily: fontFace,
-                ),
+                style: TextStyle(fontSize: fontSize.toDouble()),
               ),
             ),
           ],
