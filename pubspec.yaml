@@ -36,21 +36,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/
-  fonts:
-    - family: Myrica
-      fonts:
-        - asset: assets/fonts/myrica/Myrica.TTC
-    - family: Cica
-      fonts:
-        - asset: assets/fonts/cica/Cica-Regular.ttf
-    - family: SourceHanCodeJP
-      fonts:
-        - asset: assets/fonts/source-han-code-jp/SourceHanCodeJP.ttc
-    - family: HackGen
-      fonts:
-        - asset: assets/fonts/hackgen/HackGen-Regular.ttf
 
 flutter_icons:
   android: false

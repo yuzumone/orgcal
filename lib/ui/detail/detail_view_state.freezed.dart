@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DetailViewState implements DiagnosticableTreeMixin {
 
- String get fontFace; int get fontSize;
+ int get fontSize;
 /// Create a copy of DetailViewState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,21 +27,21 @@ $DetailViewStateCopyWith<DetailViewState> get copyWith => _$DetailViewStateCopyW
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DetailViewState'))
-    ..add(DiagnosticsProperty('fontFace', fontFace))..add(DiagnosticsProperty('fontSize', fontSize));
+    ..add(DiagnosticsProperty('fontSize', fontSize));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailViewState&&(identical(other.fontFace, fontFace) || other.fontFace == fontFace)&&(identical(other.fontSize, fontSize) || other.fontSize == fontSize));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailViewState&&(identical(other.fontSize, fontSize) || other.fontSize == fontSize));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fontFace,fontSize);
+int get hashCode => Object.hash(runtimeType,fontSize);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DetailViewState(fontFace: $fontFace, fontSize: $fontSize)';
+  return 'DetailViewState(fontSize: $fontSize)';
 }
 
 
@@ -52,7 +52,7 @@ abstract mixin class $DetailViewStateCopyWith<$Res>  {
   factory $DetailViewStateCopyWith(DetailViewState value, $Res Function(DetailViewState) _then) = _$DetailViewStateCopyWithImpl;
 @useResult
 $Res call({
- String fontFace, int fontSize
+ int fontSize
 });
 
 
@@ -69,10 +69,9 @@ class _$DetailViewStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailViewState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fontFace = null,Object? fontSize = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fontSize = null,}) {
   return _then(_self.copyWith(
-fontFace: null == fontFace ? _self.fontFace : fontFace // ignore: cast_nullable_to_non_nullable
-as String,fontSize: null == fontSize ? _self.fontSize : fontSize // ignore: cast_nullable_to_non_nullable
+fontSize: null == fontSize ? _self.fontSize : fontSize // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -84,10 +83,9 @@ as int,
 
 
 class _DetailViewState with DiagnosticableTreeMixin implements DetailViewState {
-  const _DetailViewState({this.fontFace = 'Myrica', this.fontSize = 16});
+  const _DetailViewState({this.fontSize = 16});
   
 
-@override@JsonKey() final  String fontFace;
 @override@JsonKey() final  int fontSize;
 
 /// Create a copy of DetailViewState
@@ -101,21 +99,21 @@ _$DetailViewStateCopyWith<_DetailViewState> get copyWith => __$DetailViewStateCo
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'DetailViewState'))
-    ..add(DiagnosticsProperty('fontFace', fontFace))..add(DiagnosticsProperty('fontSize', fontSize));
+    ..add(DiagnosticsProperty('fontSize', fontSize));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailViewState&&(identical(other.fontFace, fontFace) || other.fontFace == fontFace)&&(identical(other.fontSize, fontSize) || other.fontSize == fontSize));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailViewState&&(identical(other.fontSize, fontSize) || other.fontSize == fontSize));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fontFace,fontSize);
+int get hashCode => Object.hash(runtimeType,fontSize);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'DetailViewState(fontFace: $fontFace, fontSize: $fontSize)';
+  return 'DetailViewState(fontSize: $fontSize)';
 }
 
 
@@ -126,7 +124,7 @@ abstract mixin class _$DetailViewStateCopyWith<$Res> implements $DetailViewState
   factory _$DetailViewStateCopyWith(_DetailViewState value, $Res Function(_DetailViewState) _then) = __$DetailViewStateCopyWithImpl;
 @override @useResult
 $Res call({
- String fontFace, int fontSize
+ int fontSize
 });
 
 
@@ -143,10 +141,9 @@ class __$DetailViewStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailViewState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fontFace = null,Object? fontSize = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fontSize = null,}) {
   return _then(_DetailViewState(
-fontFace: null == fontFace ? _self.fontFace : fontFace // ignore: cast_nullable_to_non_nullable
-as String,fontSize: null == fontSize ? _self.fontSize : fontSize // ignore: cast_nullable_to_non_nullable
+fontSize: null == fontSize ? _self.fontSize : fontSize // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

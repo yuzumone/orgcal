@@ -8,10 +8,7 @@ part 'detail_view_state.freezed.dart';
 
 @freezed
 abstract class DetailViewState with _$DetailViewState {
-  const factory DetailViewState({
-    @Default('Myrica') String fontFace,
-    @Default(16) int fontSize,
-  }) = _DetailViewState;
+  const factory DetailViewState({@Default(16) int fontSize}) = _DetailViewState;
 }
 
 @riverpod
@@ -25,6 +22,6 @@ class DetailViewStateNotifier extends _$DetailViewStateNotifier {
   Future<void> init() async {
     final repository = ref.read(preferenceRepositoryProvider);
     final pref = await repository.getPreference();
-    state = state.copyWith(fontFace: pref.fontFace, fontSize: pref.fontSize);
+    state = state.copyWith(fontSize: pref.fontSize);
   }
 }

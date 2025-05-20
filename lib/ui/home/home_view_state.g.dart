@@ -7,7 +7,7 @@ part of 'home_view_state.dart';
 // **************************************************************************
 
 String _$homeViewStateNotifierHash() =>
-    r'db16c0a1764f8a1963b8cedcbf20614b988320b1';
+    r'9488a73a9e9bb79ac0c60a79265ab6a2411182bf';
 
 /// See also [HomeViewStateNotifier].
 @ProviderFor(HomeViewStateNotifier)

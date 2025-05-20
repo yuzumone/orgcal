@@ -31,7 +31,7 @@ void main() {
               final mock = MockPreferenceRepository();
               when(
                 () => mock.getPreference(),
-              ).thenAnswer((_) async => Preference([], [], [], "Myrica", 16));
+              ).thenAnswer((_) async => Preference([], [], [], 16));
               return mock;
             }),
           ],
