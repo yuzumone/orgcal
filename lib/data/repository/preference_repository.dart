@@ -14,6 +14,7 @@ class PreferenceRepository {
   static const argTodoKeywords = 'todo_keywords';
   static const argDoneKeywords = 'done_keywords';
   static const argFontSize = 'font_size';
+  static const argTimezone = 'timezone';
 
   PreferenceRepository();
 
@@ -25,7 +26,8 @@ class PreferenceRepository {
     final doneKeywords =
         await asyncPrefs.getStringList(argDoneKeywords) ?? ['DONE'];
     final fontSize = await asyncPrefs.getInt(argFontSize) ?? 16;
-    return Preference(urls, todoKeywords, doneKeywords, fontSize);
+    final timezone = await asyncPrefs.getString(argTimezone) ?? 'Asia/Tokyo';
+    return Preference(urls, todoKeywords, doneKeywords, fontSize, timezone);
   }
 
   void setUrls(List<String> urls) async {
@@ -47,6 +49,11 @@ class PreferenceRepository {
     final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
     await asyncPrefs.setInt(argFontSize, fontSize);
   }
+
+  void setTimezone(String timezone) async {
+    final SharedPreferencesAsync asyncPrefs = SharedPreferencesAsync();
+    await asyncPrefs.setString(argTimezone, timezone);
+  }
 }
 
 class Preference {
@@ -54,5 +61,12 @@ class Preference {
   List<String> todoKeywords;
   List<String> doneKeywords;
   int fontSize;
-  Preference(this.urls, this.todoKeywords, this.doneKeywords, this.fontSize);
+  String timezone;
+  Preference(
+    this.urls,
+    this.todoKeywords,
+    this.doneKeywords,
+    this.fontSize,
+    this.timezone,
+  );
 }

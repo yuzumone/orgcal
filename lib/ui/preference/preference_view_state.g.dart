@@ -7,7 +7,7 @@ part of 'preference_view_state.dart';
 // **************************************************************************
 
 String _$preferenceViewStateNotifierHash() =>
-    r'b6cdb569dee3c30caa6761dd95fa3ce9f8ac8e36';
+    r'53dec214e0c826f8ea6a5f07eb85c7f2e643bca0';
 
 /// See also [PreferenceViewStateNotifier].
 @ProviderFor(PreferenceViewStateNotifier)

@@ -15,6 +15,7 @@ abstract class PreferenceViewState with _$PreferenceViewState {
     @Default([]) List<String> todoKeywords,
     @Default([]) List<String> doneKeywords,
     @Default(16) int fontSize,
+    @Default('Asia/Tokyo') String timezone,
   }) = _PreferenceViewState;
 }
 
@@ -34,6 +35,7 @@ class PreferenceViewStateNotifier extends _$PreferenceViewStateNotifier {
       todoKeywords: pref.todoKeywords,
       doneKeywords: pref.doneKeywords,
       fontSize: pref.fontSize,
+      timezone: pref.timezone,
     );
   }
 
@@ -63,5 +65,11 @@ class PreferenceViewStateNotifier extends _$PreferenceViewStateNotifier {
     final repository = ref.read(preferenceRepositoryProvider);
     state = state.copyWith(fontSize: fontSize);
     repository.setFontSize(fontSize);
+  }
+
+  void setTimezone(String timezone) {
+    final repository = ref.read(preferenceRepositoryProvider);
+    state = state.copyWith(timezone: timezone);
+    repository.setTimezone(timezone);
   }
 }

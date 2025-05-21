@@ -29,9 +29,9 @@ void main() {
             }),
             preferenceRepositoryProvider.overrideWith((ref) {
               final mock = MockPreferenceRepository();
-              when(
-                () => mock.getPreference(),
-              ).thenAnswer((_) async => Preference([], [], [], 16));
+              when(() => mock.getPreference()).thenAnswer(
+                (_) async => Preference([], [], [], 16, 'Asia/Tokyo'),
+              );
               return mock;
             }),
           ],

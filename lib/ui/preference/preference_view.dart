@@ -81,7 +81,7 @@ Future<String?> _buildInputDialog(BuildContext context, String title) async {
 class MainPreferenceView extends ConsumerWidget {
   const MainPreferenceView({super.key});
 
-  static const fontSize = [
+  static const fontSizeList = [
     10,
     11,
     12,
@@ -102,6 +102,12 @@ class MainPreferenceView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(preferenceViewStateNotifierProvider.notifier);
+    final fontSize = ref.watch(
+      preferenceViewStateNotifierProvider.select((v) => v.fontSize),
+    );
+    final timezone = ref.watch(
+      preferenceViewStateNotifierProvider.select((v) => v.timezone),
+    );
 
     return ListView(
       children: <Widget>[
@@ -114,14 +120,14 @@ class MainPreferenceView extends ConsumerWidget {
         ),
         ListTile(
           title: Text('TODO Keyword'),
-          subtitle: Text('完了のTODOと認識するキーワード'),
+          subtitle: Text('未完了のTODOと認識するキーワード'),
           onTap: () {
             notifier.setViewType(PreferenceViewType.todo);
           },
         ),
         ListTile(
           title: Text('DONE Keyword'),
-          subtitle: Text('未完了のTODOと認識するキーワード'),
+          subtitle: Text('完了のTODOと認識するキーワード'),
           onTap: () {
             notifier.setViewType(PreferenceViewType.done);
           },
@@ -129,20 +135,13 @@ class MainPreferenceView extends ConsumerWidget {
         ListTile(
           title: Text('Font size'),
           trailing: DropdownButton(
-            value:
-                ref
-                    .watch(
-                      preferenceViewStateNotifierProvider.select(
-                        (v) => v.fontSize,
-                      ),
-                    )
-                    .toString(),
+            value: fontSize.toString(),
             onChanged: (String? newValue) {
               if (newValue == null) return;
               notifier.setFontSize(int.parse(newValue));
             },
             items:
-                fontSize
+                fontSizeList
                     .map<DropdownMenuItem<String>>(
                       (e) => DropdownMenuItem<String>(
                         value: e.toString(),
@@ -151,6 +150,16 @@ class MainPreferenceView extends ConsumerWidget {
                     )
                     .toList(),
           ),
+        ),
+        ListTile(
+          title: const Text('Timezone'),
+          subtitle: Text(timezone),
+          onTap: () async {
+            final result = await _buildInputDialog(context, 'Set timezone');
+            if (result != null) {
+              notifier.setTimezone(result);
+            }
+          },
         ),
       ],
     );
@@ -229,7 +238,7 @@ class PreferenceInputView extends ConsumerWidget {
             }
           }
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.add, color: Colors.white),
       ),
     );
   }

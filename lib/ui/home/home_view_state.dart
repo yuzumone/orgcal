@@ -43,11 +43,11 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
       doneKeywords: pref.doneKeywords,
     );
     if (files.isNotEmpty) {
-      syncCalendar(files[0]); //TODO
+      syncCalendar(files[0], pref.timezone); //TODO
     }
   }
 
-  Future<void> syncCalendar(File file) async {
+  Future<void> syncCalendar(File file, String timezone) async {
     final deviceCalendarPlugin = DeviceCalendarPlugin();
     try {
       var permissionsGranted = await deviceCalendarPlugin.hasPermissions();
@@ -68,9 +68,9 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
         if (calId == null) {
           return;
         }
-        updateEvents(deviceCalendarPlugin, calId, file);
+        updateEvents(deviceCalendarPlugin, calId, timezone, file);
       } else {
-        updateEvents(deviceCalendarPlugin, orgcal.id!, file);
+        updateEvents(deviceCalendarPlugin, orgcal.id!, timezone, file);
       }
     } catch (e) {
       // TODO
@@ -101,6 +101,7 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
   Future<void> updateEvents(
     DeviceCalendarPlugin plugin,
     String id,
+    String timezone,
     File file,
   ) async {
     final params = RetrieveEventsParams(
@@ -116,14 +117,14 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
 
     for (final h in file.org.headlines) {
       if (h.scheduledDateTime == null) continue;
-      await plugin.createOrUpdateEvent(createEvent(id, h));
+      await plugin.createOrUpdateEvent(createEvent(id, timezone, h));
     }
   }
 
-  Event createEvent(String id, Headline headline) {
+  Event createEvent(String id, String timezone, Headline headline) {
     bool allDay = false;
     TZDateTime? end;
-    final location = getLocation('Asia/Tokyo'); // TODO
+    final location = getLocation(timezone);
     final start = TZDateTime.from(headline.scheduledDateTime!, location);
 
     if (headline.scheduled!.contains(':')) {
