@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/data/model/preference_view_type.dart';
 import 'package:orgcal/ui/preference/preference_view_state.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class PreferenceView extends ConsumerWidget {
   const PreferenceView({super.key});
@@ -160,6 +161,17 @@ class MainPreferenceView extends ConsumerWidget {
               notifier.setTimezone(result);
             }
           },
+        ),
+        ListTile(
+          title: const Text('LICENSE'),
+          onTap:
+              () => PackageInfo.fromPlatform().then(
+                (value) => showAboutDialog(
+                  context: context,
+                  applicationName: value.appName,
+                  applicationVersion: value.version,
+                ),
+              ),
         ),
       ],
     );
