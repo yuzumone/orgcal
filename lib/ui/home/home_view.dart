@@ -47,7 +47,10 @@ class HomeView extends ConsumerWidget {
           ),
         ],
       ),
-      body: Container(child: _listWidgets.elementAt(pageIndex)),
+      body: RefreshIndicator(
+        onRefresh: () => notifier.init(),
+        child: _listWidgets.elementAt(pageIndex),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue[300],
         tooltip: 'Search',
