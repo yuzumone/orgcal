@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:orgcal/data/model/preference_view_type.dart';
 import 'package:orgcal/data/repository/preference_repository.dart';
@@ -15,6 +16,7 @@ abstract class PreferenceViewState with _$PreferenceViewState {
     @Default([]) List<String> todoKeywords,
     @Default([]) List<String> doneKeywords,
     @Default(16) int fontSize,
+    @Default(0) int calendarColor,
     @Default('Asia/Tokyo') String timezone,
   }) = _PreferenceViewState;
 }
@@ -35,6 +37,7 @@ class PreferenceViewStateNotifier extends _$PreferenceViewStateNotifier {
       todoKeywords: pref.todoKeywords,
       doneKeywords: pref.doneKeywords,
       fontSize: pref.fontSize,
+      calendarColor: pref.calendartColor,
       timezone: pref.timezone,
     );
   }
@@ -65,6 +68,13 @@ class PreferenceViewStateNotifier extends _$PreferenceViewStateNotifier {
     final repository = ref.read(preferenceRepositoryProvider);
     state = state.copyWith(fontSize: fontSize);
     repository.setFontSize(fontSize);
+  }
+
+  void setCalendarColor(Color color) {
+    final intColor = color.toARGB32();
+    final repository = ref.read(preferenceRepositoryProvider);
+    state = state.copyWith(calendarColor: intColor);
+    repository.setCalendarColor(intColor);
   }
 
   void setTimezone(String timezone) {

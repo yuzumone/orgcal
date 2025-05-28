@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:orgcal/data/model/preference_view_type.dart';
 import 'package:orgcal/ui/preference/preference_view_state.dart';
@@ -99,12 +100,37 @@ class MainPreferenceView extends ConsumerWidget {
     23,
     24,
   ];
+  static const List<Color> colors = [
+    Colors.red,
+    Colors.pink,
+    Colors.purple,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.blue,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
+    Colors.green,
+    Colors.lightGreen,
+    Colors.lime,
+    Colors.yellow,
+    Colors.amber,
+    Colors.orange,
+    Colors.deepOrange,
+    Colors.brown,
+    Colors.grey,
+    Colors.blueGrey,
+    Colors.black,
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(preferenceViewStateNotifierProvider.notifier);
     final fontSize = ref.watch(
       preferenceViewStateNotifierProvider.select((v) => v.fontSize),
+    );
+    final calendarColor = ref.watch(
+      preferenceViewStateNotifierProvider.select((v) => v.calendarColor),
     );
     final timezone = ref.watch(
       preferenceViewStateNotifierProvider.select((v) => v.timezone),
@@ -151,6 +177,29 @@ class MainPreferenceView extends ConsumerWidget {
                     )
                     .toList(),
           ),
+        ),
+        ListTile(
+          title: const Text('Device Calendar Color'),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Select a color'),
+                  content: SingleChildScrollView(
+                    child: BlockPicker(
+                      pickerColor: Color(calendarColor),
+                      availableColors: colors,
+                      onColorChanged: (color) {
+                        notifier.setCalendarColor(color);
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          trailing: CircleAvatar(backgroundColor: Color(calendarColor)),
         ),
         ListTile(
           title: const Text('Timezone'),
