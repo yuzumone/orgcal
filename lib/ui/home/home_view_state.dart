@@ -1,5 +1,6 @@
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:org_parser/org_parser.dart';
 import 'package:orgcal/data/model/file.dart';
@@ -43,11 +44,15 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
       doneKeywords: pref.doneKeywords,
     );
     if (files.isNotEmpty) {
-      syncCalendar(files[0], pref.timezone); //TODO
+      syncCalendar(files[0], Color(pref.calendartColor), pref.timezone); //TODO
     }
   }
 
-  Future<void> syncCalendar(File file, String timezone) async {
+  Future<void> syncCalendar(
+    File file,
+    Color calendarColor,
+    String timezone,
+  ) async {
     final deviceCalendarPlugin = DeviceCalendarPlugin();
     try {
       var permissionsGranted = await deviceCalendarPlugin.hasPermissions();
@@ -64,7 +69,7 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
 
       final orgcal = await retrieveOrgCalendar(deviceCalendarPlugin);
       if (orgcal == null) {
-        final calId = await createCalendar(deviceCalendarPlugin);
+        final calId = await createCalendar(deviceCalendarPlugin, calendarColor);
         if (calId == null) {
           return;
         }
@@ -87,9 +92,10 @@ class HomeViewStateNotifier extends _$HomeViewStateNotifier {
     );
   }
 
-  Future<String?> createCalendar(DeviceCalendarPlugin plugin) async {
+  Future<String?> createCalendar(DeviceCalendarPlugin plugin, Color calendarColor) async {
     final result = await plugin.createCalendar(
       'orgcal',
+      calendarColor: calendarColor,
       localAccountName: 'orgcal',
     );
     if (result.isSuccess && result.data != null) {
